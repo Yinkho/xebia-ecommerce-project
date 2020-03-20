@@ -37,7 +37,7 @@ export const LeftContainer = styled.div`
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: none;
-      transform: scale(0.97);
+      transform: scale(0.98);
     }
   }
 
