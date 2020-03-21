@@ -25,20 +25,33 @@ export const ProduitPanierContainer = styled.div`
 `;
 
 export const ProduitPanier = styled.div`
-    @mixin all-center {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
     width: 500px;
+    height: 150px;
+
+    #supprimer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 50px;
+        padding: 0;
+
+        & > img {
+            height: 17px;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1);
+            }
+        }
+    }
 
     #livre {
-        height: 150px;
+        height: 100%;
         width: 100px;
     }
 

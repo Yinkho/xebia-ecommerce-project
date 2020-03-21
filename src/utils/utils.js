@@ -83,7 +83,7 @@ export const getBestOffer = async (panier, sousTotal) => {
 
 export const getSousTotal = panier => {
     return panier.reduce((acc, produit) => acc + produit.price * produit.quantity, 0);
-}
+};
 
 export const updateAddition = async (panier, addition, setAddition) => {
     const sousTotal = getSousTotal(panier);
@@ -93,4 +93,8 @@ export const updateAddition = async (panier, addition, setAddition) => {
         promotion: promotion - sousTotal,
         total: promotion
     });
-}
+};
+
+export const deleteProduitFromPanier = (isbn, panier, setPanier) => {
+    setPanier(panier.filter(produit => produit.isbn !== isbn));
+};

@@ -11,8 +11,9 @@ import { Link } from 'react-router-dom';
 import { PanierContext } from '../../contexts/PanierContext';
 import { ProduitsContext } from '../../contexts/ProduitsContext';
 import { AdditionContext } from '../../contexts/AdditionContext';
-import { updatePanier, updateAddition, updateProduits } from '../../utils/utils';
+import { updatePanier, updateAddition, updateProduits, deleteProduitFromPanier } from '../../utils/utils';
 import SyncLoader from "react-spinners/SyncLoader";
+import deleteLogo from '../../assets/delete.png';
 
 const Panier = () => {
 
@@ -34,6 +35,9 @@ const Panier = () => {
         ? panier.map((produitPanier, i) => (
             <div key={produitPanier.isbn}>
                 <ProduitPanier>
+                    <div id="supprimer">
+                        <img onClick={() => deleteProduitFromPanier(produitPanier.isbn, panier, setPanier)} src={deleteLogo} alt="Supprimer"/>
+                    </div>
                     <img id='livre' src={produitPanier.cover} alt={produitPanier.title} />
                     <div>
                         <Link id="title" to={`/${produitPanier.isbn}`}>{produitPanier.title}</Link>
