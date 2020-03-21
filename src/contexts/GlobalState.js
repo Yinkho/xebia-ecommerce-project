@@ -4,7 +4,6 @@ import { ProduitsProvider } from './ProduitsContext';
 import { PanierProvider } from './PanierContext';
 import { AdditionProvider } from './AdditionContext';
 
-
 export const GlobalState = props => {
 
     return (
