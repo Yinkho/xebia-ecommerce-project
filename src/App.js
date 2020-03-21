@@ -9,28 +9,22 @@ import Commande from './components/Commande/Commande';
 import { RechercheProvider } from './contexts/RechercheContext';
 import { ProduitsProvider } from './contexts/ProduitsContext';
 import { PanierProvider } from './contexts/PanierContext';
-import { AdditionProvider } from './contexts/AdditionContext';
+import { GlobalState } from './contexts/GlobalState';
 
 function App() {
   return (
-    <ProduitsProvider>
-      <PanierProvider>
-        <RechercheProvider>
-          <AdditionProvider>
-            <div className="App">
-                <Navbar />
-                <Switch>
-                  <Route exact path={"/"} component={ListeProduits} />
-                  <Route exact path={"/panier"} component={Panier} />
-                  <Route exact path={"/checkout"} component={Commande} />
-                  <Route exact path={"/:isbn"} component={PageProduit} />
-                  {/* ADD Error Page */}
-                </Switch>
-            </div>
-          </AdditionProvider>
-        </RechercheProvider>
-      </PanierProvider>
-    </ProduitsProvider>
+    <GlobalState>
+      <div className="App">
+          <Navbar />
+          <Switch>
+            <Route exact path={"/"} component={ListeProduits} />
+            <Route exact path={"/panier"} component={Panier} />
+            <Route exact path={"/checkout"} component={Commande} />
+            <Route exact path={"/:isbn"} component={PageProduit} />
+            {/* ADD Error Page */}
+          </Switch>
+      </div>
+    </GlobalState>
   );
 }
 

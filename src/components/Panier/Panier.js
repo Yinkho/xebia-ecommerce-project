@@ -26,7 +26,7 @@ const Panier = () => {
     }, [panier]);
 
     const handleProduitsPanierAddition = (action, livre) => {
-        updateProduits(action, panier, produits, setProduits, livre)
+        updateProduits(action, panier, produits, setProduits, livre);
         updatePanier(action, panier, setPanier, livre);
     }
 
