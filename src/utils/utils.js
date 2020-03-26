@@ -1,57 +1,5 @@
 import axios from 'axios';
 
-export const updateProduits = (action, panier, produits, setProduits, livre) => {
-    const modifyQuantityInProduits = produits.map(produit => {
-        if(produit.isbn === livre.isbn) {
-            switch (action) {
-                case "ADD":
-                    return { ...produit, quantity: ++produit.quantity };
-                    break;
-            
-                case "DELETE":
-                    return produit.quantity > 0 ? { ...produit, quantity: --produit.quantity } : produit;
-                    break;
-
-                default:
-                    break;
-            }
-        } else {
-            return produit;
-        }
-    });
-    setProduits(modifyQuantityInProduits);
-};
-
-export const updatePanier = (action, panier, setPanier, livre) => {
-    const isInPanier = panier.some(produit => produit.isbn === livre.isbn);
-    let modifyQuantityInPanier;
-
-    if(!isInPanier) {
-        setPanier([ ...panier, livre ]);
-    } else {
-        //modifyQuantityInPanier = produits.filter(produit => panier.some(produitPanier => produit.isbn === produitPanier.isbn));
-        modifyQuantityInPanier = panier.map(produit => {
-            if(produit.isbn === livre.isbn) {
-                switch (action) {
-                    case "ADD":
-                        return { ...produit, quantity: ++produit.quantity };
-                        break;
-                
-                    case "DELETE":
-                        return produit.quantity > 0 ? { ...produit, quantity: --produit.quantity } : produit;
-                        break;
-
-                    default:
-                        break;
-                }
-            } else {
-                return produit;
-            }
-        });
-        setPanier(modifyQuantityInPanier.filter(produit => produit.quantity > 0));
-    }
-};
-
 export const getBestOffer = async (panier, sousTotal) => {
     const isbnString = panier.map(produit => produit.isbn).join(',');
     let total = [];
@@ -93,8 +41,4 @@ export const updateAddition = async (panier, addition, setAddition) => {
         promotion: promotion - sousTotal,
         total: promotion
     });
-};
-
-export const deleteProduitFromPanier = (isbn, panier, setPanier) => {
-    setPanier(panier.filter(produit => produit.isbn !== isbn));
 };

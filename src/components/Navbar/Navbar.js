@@ -19,7 +19,7 @@ import logo from '../../assets/logo.png';
 const Navbar = () => {
 
     const [recherche, setRecherche] = useContext(RechercheContext);
-    const [panier] = useContext(PanierContext);
+    const [statePanier] = useContext(PanierContext);
     const history = useHistory();
 
     const handleChange = e => {
@@ -35,7 +35,7 @@ const Navbar = () => {
     };
 
     const renderNotification = () => {
-        return panier.length > 0 && <p>{panier.length}</p>;
+        return statePanier.length > 0 && <p>{statePanier.length}</p>;
     };
 
     return (

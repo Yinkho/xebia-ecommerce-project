@@ -7,14 +7,15 @@ import { ProduitsContext } from '../../contexts/ProduitsContext';
 const ListeProduits = () => {
 
     const [recherche] = useContext(RechercheContext);
-    const [produits] = useContext(ProduitsContext);
+    const [stateProduits] = useContext(ProduitsContext);
 
     const renderLivres = () => {
-        return produits
+        return stateProduits
             .filter(livre => livre.title.toLowerCase().includes(recherche.toLowerCase().trim()))
             .map(livre => (
                 <CarteProduit key={livre.isbn} livre={livre} />
             ))
+        
     }
 
     return (

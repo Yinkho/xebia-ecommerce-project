@@ -1,22 +1,18 @@
-import React, { useState, useContext, useEffect, Suspense } from 'react';
+import React, { useState, useContext, Suspense } from 'react';
 import { LivreCard } from './CarteProduit.styles';
 import { Link } from 'react-router-dom';
 import { PanierContext } from '../../contexts/PanierContext';
 import { ProduitsContext } from '../../contexts/ProduitsContext';
 import { AdditionContext } from '../../contexts/AdditionContext';
-import { updatePanier, updateAddition, updateProduits } from '../../utils/utils';
+import { updateAddition } from '../../utils/utils';
 import SyncLoader from "react-spinners/SyncLoader";
 
 const CarteProduit = ({ livre }) => {
 
     const [isHover, setIsHover] = useState(false);
-    const [panier, setPanier] = useContext(PanierContext);
-    const [produits, setProduits] = useContext(ProduitsContext);
+    const [statePanier, dispatchPanier] = useContext(PanierContext);
+    const [stateProduits, dispatchProduits] = useContext(ProduitsContext);
     const [addition, setAddition] = useContext(AdditionContext);
-
-    useEffect(() => {
-      updateAddition(panier, addition, setAddition);
-    }, [panier]);
 
     const { cover, title, price, synopsis, isbn } = livre;
 
@@ -41,8 +37,9 @@ const CarteProduit = ({ livre }) => {
     const toggleHover = () => setIsHover(!isHover);
 
     const handleProduitsPanierAddition = () => {
-        updateProduits("ADD", panier, produits, setProduits, livre)
-        updatePanier("ADD", panier, setPanier, livre);
+        dispatchPanier({ type: 'ADD', payload: livre });
+        dispatchProduits({ type: 'ADD', payload: livre });
+        updateAddition(statePanier, addition, setAddition);
     }
 
     return (

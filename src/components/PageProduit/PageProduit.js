@@ -1,27 +1,24 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { PageProduitContainer, LeftContainer, RightContainer } from './PageProduit.styles';
 import { PanierContext } from '../../contexts/PanierContext';
 import { ProduitsContext } from '../../contexts/ProduitsContext';
 import { AdditionContext } from '../../contexts/AdditionContext';
-import { updatePanier, updateAddition, updateProduits } from '../../utils/utils';
+import { updateAddition } from '../../utils/utils';
 
 const PageProduit = ({ match }) => {
 
-    const [panier, setPanier] = useContext(PanierContext);
-    const [produits, setProduits] = useContext(ProduitsContext);
+    const [statePanier, dispatchPanier] = useContext(PanierContext);
+    const [stateProduits, dispatchProduits] = useContext(ProduitsContext);
     const [addition, setAddition] = useContext(AdditionContext);
 
-    useEffect(() => {
-        updateAddition(panier, addition, setAddition);
-    }, [panier]);
-
-    const handleProduitsPanierAddition = (action, livre) => {
-        updateProduits(action, panier, produits, setProduits, livre)
-        updatePanier(action, panier, setPanier, livre);
+    const handleProduitsPanierAddition = livre => {
+        dispatchProduits({ type: 'ADD', payload: livre });
+        dispatchPanier({ type: 'ADD', payload: livre });
+        updateAddition(statePanier, addition, setAddition);
     }
 
     const renderPageProduit = param => {
-        const livre = produits.find(produit => produit.isbn.toString() === param);
+        const livre = stateProduits.find(produit => produit.isbn.toString() === param);
         
         return livre
             ? (
@@ -29,7 +26,7 @@ const PageProduit = ({ match }) => {
                     <LeftContainer>
                         <img src={livre.cover} alt={livre.title} />
                         <p>{livre.price} €</p>
-                        <button onClick={() => handleProduitsPanierAddition("ADD", livre)}>Ajouter à mon panier</button>
+                        <button onClick={() => handleProduitsPanierAddition(livre)}>Ajouter à mon panier</button>
                     </LeftContainer>
                     <RightContainer>
                         <p id='title'>{livre.title}</p>

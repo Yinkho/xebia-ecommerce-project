@@ -6,9 +6,6 @@ import Navbar from './components/Navbar/Navbar';
 import PageProduit from './components/PageProduit/PageProduit';
 import Panier from './components/Panier/Panier';
 import Commande from './components/Commande/Commande';
-import { RechercheProvider } from './contexts/RechercheContext';
-import { ProduitsProvider } from './contexts/ProduitsContext';
-import { PanierProvider } from './contexts/PanierContext';
 import { GlobalState } from './contexts/GlobalState';
 
 function App() {

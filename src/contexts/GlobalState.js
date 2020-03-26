@@ -7,14 +7,14 @@ import { AdditionProvider } from './AdditionContext';
 export const GlobalState = props => {
 
     return (
-    <ProduitsProvider>
-        <PanierProvider>
-            <RechercheProvider>
-                <AdditionProvider>
-                    {props.children}
-                </AdditionProvider>
-            </RechercheProvider>
-        </PanierProvider>
-    </ProduitsProvider>
+        <ProduitsProvider>
+            <PanierProvider>
+                <RechercheProvider>
+                    <AdditionProvider>
+                        {props.children}
+                    </AdditionProvider>
+                </RechercheProvider>
+            </PanierProvider>
+        </ProduitsProvider>
     )
 }
