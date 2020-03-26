@@ -33,7 +33,7 @@ export const getSousTotal = panier => {
     return panier.reduce((acc, produit) => acc + produit.price * produit.quantity, 0);
 };
 
-export const updateAddition = async (panier, addition, setAddition) => {
+export const updateAddition = async (panier, setAddition) => {
     const sousTotal = getSousTotal(panier);
     const promotion = await getBestOffer(panier, sousTotal);
     setAddition({

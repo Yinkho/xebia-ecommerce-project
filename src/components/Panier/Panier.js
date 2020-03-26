@@ -1,4 +1,4 @@
-import React, { useContext, Suspense } from 'react';
+import React, { useContext, useEffect, Suspense } from 'react';
 import { 
     PanierContainer, 
     ProduitPanier, 
@@ -21,10 +21,13 @@ const Panier = () => {
     const [stateProduits, dispatchProduits] = useContext(ProduitsContext);
     const [addition, setAddition] = useContext(AdditionContext);
 
+    useEffect(() => {
+        updateAddition(statePanier, setAddition);
+    }, [statePanier])
+    
     const handleProduitsPanierAddition = (action, livre) => {
         dispatchProduits({ type: action, payload: livre });
         dispatchPanier({ type: action, payload: livre });
-        updateAddition(statePanier, addition, setAddition);
     }
 
     const renderProduitsPanier = () => {

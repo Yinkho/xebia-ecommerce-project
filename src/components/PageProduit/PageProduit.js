@@ -14,7 +14,7 @@ const PageProduit = ({ match }) => {
     const handleProduitsPanierAddition = livre => {
         dispatchProduits({ type: 'ADD', payload: livre });
         dispatchPanier({ type: 'ADD', payload: livre });
-        updateAddition(statePanier, addition, setAddition);
+        updateAddition(statePanier, setAddition);
     }
 
     const renderPageProduit = param => {
